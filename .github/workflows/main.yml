@@ -1,4 +1,4 @@
-name: Swift CI
+name: Run Tests
 
 on:
   push:
@@ -9,18 +9,13 @@ on:
       - main
 
 jobs:
-  build:
+  test:
     runs-on: macos-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Xcode (latest)
-        run: |
-          sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
-          xcodebuild -version
-
-      - name: Run tests
+      - name: Run tests using Xcode
         run: |
           xcodebuild clean build test -scheme IS322_CalculatorApp -destination 'platform=iOS Simulator,name=iPhone 13,OS=16.2'
