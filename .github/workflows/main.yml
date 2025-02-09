@@ -16,11 +16,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Xcode
-        uses: actions/setup-xcode@v3
-        with:
-          xcode-version: '14.2'  # Specify the version of Xcode you want to use
-
       - name: Install dependencies
         run: |
           sudo gem install cocoapods
@@ -28,4 +23,4 @@ jobs:
 
       - name: Run tests
         run: |
-          xcodebuild test -scheme IS322_CalculatorApp -destination 'platform=iOS Simulator,name=iPhone 13,OS=16.2' clean build test
+          xcodebuild clean build test -scheme IS322_CalculatorApp -destination 'platform=iOS Simulator,name=iPhone 13,OS=16.2'
