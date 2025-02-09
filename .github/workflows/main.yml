@@ -16,10 +16,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Latest Xcode
+      - name: Set up Xcode (latest)
         run: |
           sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
-          sudo xcodebuild -version
+          xcodebuild -version
 
       - name: Run tests
         run: |
