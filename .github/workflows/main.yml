@@ -1,0 +1,31 @@
+name: Swift CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Xcode
+        uses: maxim-lobanov/setup-xcode@v2
+        with:
+          xcode-version: '14.2'  # Specify the version of Xcode you want to use
+
+      - name: Install dependencies
+        run: |
+          sudo gem install cocoapods
+          pod install
+
+      - name: Run tests
+        run: |
+          xcodebuild test -scheme IS322_CalculatorApp -destination 'platform=iOS Simulator,name=iPhone 13,OS=16.2' clean build test
