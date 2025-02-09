@@ -29,4 +29,3 @@ jobs:
       - name: Run tests
         run: |
           xcodebuild test -scheme IS322_CalculatorApp -destination 'platform=iOS Simulator,name=iPhone 13,OS=16.2' clean build test
-``
