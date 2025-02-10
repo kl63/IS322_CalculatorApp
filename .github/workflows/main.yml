@@ -16,11 +16,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Xcode
-        uses: macos-setup-action@v1
-        with:
-          xcode-version: '13.0' # Adjust to the version you're using
-
       - name: Run Swift tests
         run: |
           xcodebuild test -scheme IS322_CalculatorAppTests -destination 'platform=iOS Simulator,name=iPhone 13,OS=16.2'
