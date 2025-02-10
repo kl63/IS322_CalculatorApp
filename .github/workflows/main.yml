@@ -1,4 +1,4 @@
-name: Run Tests
+name: Run Swift Tests
 
 on:
   push:
@@ -16,6 +16,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Run tests
+      - name: Set up Xcode
+        uses: macos-setup-action@v1
+        with:
+          xcode-version: '14.2' # Adjust to the version you're using
+
+      - name: Run Swift tests
         run: |
           xcodebuild test -scheme IS322_CalculatorAppTests -destination 'platform=iOS Simulator,name=iPhone 13,OS=16.2'
