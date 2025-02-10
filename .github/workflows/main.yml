@@ -19,7 +19,7 @@ jobs:
       - name: Set up Xcode
         uses: macos-setup-action@v1
         with:
-          xcode-version: '14.2' # Adjust to the version you're using
+          xcode-version: '13.0' # Adjust to the version you're using
 
       - name: Run Swift tests
         run: |
