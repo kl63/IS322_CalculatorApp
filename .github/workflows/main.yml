@@ -16,6 +16,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Clear Derived Data
+        run: |
+          rm -rf ~/Library/Developer/Xcode/DerivedData/*
+
       - name: Run Swift tests
         run: |
           xcodebuild test -scheme IS322_CalculatorAppTests -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.2'
