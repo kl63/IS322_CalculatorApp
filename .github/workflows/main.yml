@@ -13,32 +13,22 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      # Checkout the code from the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up the specified version of Xcode to avoid any version mismatch issues
-      - name: Set up Xcode 15.4
+      - name: Set up Xcode 15.3
         run: |
-          sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
+          sudo xcode-select -s /Applications/Xcode_15.3.app/Contents/Developer
 
-      # Clear Derived Data to ensure no corrupted build data is left over
       - name: Clear Derived Data
         run: |
           rm -rf ~/Library/Developer/Xcode/DerivedData/*
 
-      # Reset all simulators to ensure no previous configurations are interfering
       - name: Reset iOS Simulator
         run: |
-          xcrun simctl shutdown all    # Shutdown all simulators
-          xcrun simctl erase all       # Erase all simulators
+          xcrun simctl shutdown all
+          xcrun simctl erase all
 
-      # Run Swift tests on a clean environment with verbose output
       - name: Run Swift tests
         run: |
           xcodebuild clean test -scheme IS322_CalculatorAppTests -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.2' -verbose
-
-      # Optionally, if you're caching any dependencies, clear the cache to ensure a clean build
-      - name: Clear Cache (Optional)
-        run: |
-          rm -rf ~/.cache
