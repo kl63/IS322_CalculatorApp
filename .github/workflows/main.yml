@@ -16,10 +16,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up Xcode
+        run: |
+          # Ensure that the correct version of Xcode is being used
+          sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
+
       - name: Clear Derived Data
         run: |
           rm -rf ~/Library/Developer/Xcode/DerivedData/*
 
+      - name: Reset iOS Simulator
+        run: |
+          xcrun simctl shutdown all # Shutdown all simulators
+          xcrun simctl erase all    # Erase all simulators
+
       - name: Run Swift tests
         run: |
-          xcodebuild test -scheme IS322_CalculatorAppTests -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.2'
+          xcodebuild clean test -scheme IS322_CalculatorAppTests -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.2' -verbose
